@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'type', 'phone_no'
     ];
 
     /**
@@ -55,5 +55,10 @@ class User extends Authenticatable
         }
 
         return $roles;
+    }
+
+    public function doctorDetails()
+    {
+        return $this->hasOne(DoctorDetails::class);
     }
 }

@@ -34,7 +34,7 @@ class UserController extends Controller
     public function getUserList(Request $request): mixed
     {
         $data = User::get();
-        $hasManageUser = Auth::user()->can('manage_user');
+        $hasManageUser = Auth::user()->can('manage_banners');
 
         return Datatables::of($data)
             ->addColumn('roles', function ($data) {
@@ -103,6 +103,7 @@ class UserController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => $request->password,
+                'type' => $request->type
             ]);
 
 

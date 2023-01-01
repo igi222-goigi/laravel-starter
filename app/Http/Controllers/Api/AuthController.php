@@ -9,19 +9,23 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends BaseController
 {
     public function login(AuthRequest $request): JsonResponse
     {
-        $credentials = $request->only(['email', 'password']);
+        $credentials = $request->only(['email', 'password', 'type']);
 
         if (auth()->attempt($credentials)) {
             $accessToken = auth()->user()->createToken('authToken')->accessToken;
+            $user = Auth::user();
 
             return $this->successResponse([
-                'access_token' => $accessToken,
+                'response' => $user,
+                '_token' => $accessToken,
             ]);
+            exit;
         }
 
         return $this->failedResponse('Invalid Credentials!');

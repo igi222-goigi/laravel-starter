@@ -11,99 +11,78 @@ use Illuminate\Http\Request;
 class UserController extends BaseController
 {
     /**
-     * Show Users List
+     * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return JsonResponse
+     * @return \Illuminate\Http\Response
      */
-    public function list(Request $request): JsonResponse
+    public function index()
     {
-        $perPage = $request->per_page ?? 10;
-        $users = User::paginate($perPage);
-
-        return $this->successResponse($users);
+        echo 'hello';
     }
 
     /**
-     * Store User Information
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
      *
      * @param UserRequest $request
      * @return JsonResponse
      */
-    public function store(UserRequest $request): JsonResponse
+    public function store(Request $request)
     {
-        // store user information
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
-
-        if ($user) {
-            $role = $user->syncRoles($request->role);
-
-            return $this->successResponse([
-                'message' => 'User created succesfully!',
-            ]);
-        }
-
-        return $this->failedResponse();
+        dd($request);
     }
 
     /**
-     * Show User Profile
+     * Display the specified resource.
      *
-     * @param int $id
-     * @param Request $request
-     * @return JsonResponse
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function profile($id, Request $request): JsonResponse
+    public function show($id)
     {
-        if ($user = User::find($id)) {
-            return $this->successResponse($user);
-        }
-
-        return $this->failedResponse('Not found!');
+        //
     }
 
     /**
-     * Delete User
+     * Show the form for editing the specified resource.
      *
-     * @param int $id
-     * @param Request $request
-     * @return JsonResponse
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function delete($id, Request $request): JsonResponse
+    public function edit($id)
     {
-        if ($user = User::find($id)) {
-            $user->delete();
-
-            return $this->successResponse([
-                'message' => 'User has been deleted',
-            ]);
-        }
-
-        return $this->failedResponse('Not found!');
+        //
     }
 
     /**
-     * Change User Role
+     * Update the specified resource in storage.
      *
-     * @param int $id
-     * @param RoleChangeRequest $request
-     * @return JsonResponse
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function changeRole($id, RoleChangeRequest $request): JsonResponse
+    public function update(Request $request, $id)
     {
-        if ($user = User::find($id)) {
-            // assign role to user
-            $user->syncRoles($request->roles);
+        //
+    }
 
-            return $this->successResponse([
-                'message' => 'Users Role has been updated!',
-            ]);
-        }
-
-        return $this->failedResponse();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

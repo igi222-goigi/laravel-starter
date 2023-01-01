@@ -15,7 +15,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,20 +26,20 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string ',
-            'email' => 'required | email | unique:users',
-            'password' => 'required | confirmed',
-            'role' => 'required',
+            'name' => 'required|string ',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed',
+            'type' => 'required'
         ];
     }
 
-    /**
-     * Handle a failed validation attempt for API.
-     */
-    protected function failedValidation(Validator $validator)
-    {
-        if (request()->is('api/*')) {
-            throw new ApiFailedException($validator->errors());
-        }
-    }
+    // /**
+    //  * Handle a failed validation attempt for API.
+    //  */
+    // protected function failedValidation(Validator $validator)
+    // {
+    //     if (request()->is('api/*')) {
+    //         throw new ApiFailedException($validator->errors());
+    //     }
+    // }
 }

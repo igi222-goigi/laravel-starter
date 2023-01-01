@@ -2,7 +2,5 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/all.css": "/all.css",
-    "/all.js": "/all.js",
-    "/all.min.css": "/all.min.css",
-    "/all.min.js": "/all.min.js"
+    "/all.js": "/all.js"
 }
